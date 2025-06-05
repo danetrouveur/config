@@ -37,7 +37,15 @@ endsnippet
 
 # general commands
 
-snippet beg "Begin environment" bA
+snippet hs "horizontal space" iA
+\hspace{$1ex}$0
+endsnippet 
+
+snippet vs "vertical space" iA
+\vspace{$1ex}$0
+endsnippet
+
+snippet beg "begin environment" bA
 \begin{$1}
 $0
 \end{$1}
@@ -85,6 +93,11 @@ $0
 endsnippet
 
 context "math()"
+snippet op "math operator" iA
+\mathop{$1}$0
+endsnippet
+
+context "math()"
 snippet // "\frac{}{} command" iA
 \dfrac{$1}{$2}$0
 endsnippet
@@ -104,7 +117,6 @@ snippet bm "bold font" iA
 {\bm $1}$0
 endsnippet
 
-context "math()"
 snippet bf "bold font" iA
 {\bf $1}$0
 endsnippet
@@ -125,21 +137,16 @@ snippet rm "roman font" iA
 \mathrm{$1}$0
 endsnippet
 
-# contextual auto math commands
-
 context "math()"
-snippet set "set" iA
-\\{$1 \;|\; $2\\}$0
+snippet fk "frak font" iA
+\mathfrak{$1}$0
 endsnippet
 
-context "math()"
-snippet cir "circle" iA
-\circ
-endsnippet
+# contextual auto physics commands
 
 context "math()"
-snippet hat "hat" iA
-\hat{$1}$0
+snippet hb "hbar" iA
+\hbar $0
 endsnippet
 
 context "math()"
@@ -169,7 +176,59 @@ endsnippet
 
 context "math()"
 snippet int "integrate" iA
-\int $3\;d$4
+\int $0
+endsnippet
+
+# contextual auto math commands
+
+context "math()"
+snippet set "set" iA
+\\{$1 \,|\, $2\\}$0
+endsnippet
+
+context "math()"
+snippet in "set" i
+\in $0
+endsnippet
+
+context "math()"
+snippet sub "subset" iA
+\subset $0
+endsnippet
+
+context "math()"
+snippet sup "superset" iA
+\supset $0
+endsnippet
+
+context "math()"
+snippet bar "bar" iA
+\bar{$1}$0
+endsnippet
+
+context "math()"
+snippet under "under brace" iA
+\underbrace{$1}_{$2}$0
+endsnippet
+
+context "math()"
+snippet over "overline" iA
+\overline{$1}$0
+endsnippet
+
+context "math()"
+snippet cir "circle" iA
+\circ
+endsnippet
+
+context "math()"
+snippet equ "equivalent" i
+\equiv
+endsnippet
+
+context "math()"
+snippet hat "hat" iA
+\hat{$1}$0
 endsnippet
 
 context "math()"
@@ -233,6 +292,11 @@ snippet tran "transpose" iA
 endsnippet
 
 context "math()"
+snippet comp "completment" iA
+\,\backslash\,$0
+endsnippet
+
+context "math()"
 snippet ^ "superscript" iA
 ^{$1}$0
 endsnippet
@@ -282,7 +346,7 @@ endsnippet
 
 context "math()"
 snippet bigc "big curly brackets" iA
-\Big\{$1\Big\}$0
+\Big\\{$1\Big\\}$0
 endsnippet
 
 context "math()"
@@ -291,8 +355,23 @@ snippet bigs "big square brackets" iA
 endsnippet
 
 context "math()"
-snippet exp "exponential" iA
-\exp\{\{$1\}\}$0
+snippet bigu "big union" iA
+\bigcup $0
+endsnippet
+
+context "math()"
+snippet bigi "big intersection" iA
+\bigcap $0
+endsnippet
+
+context "math()"
+snippet cap "cap" iA
+\cap $0
+endsnippet
+
+context "math()"
+snippet cup "cup" iA
+\cup $0
 endsnippet
 
 context "math()"
@@ -307,6 +386,11 @@ snippet ddot "ddot" iA
 \ddot{$1}$0
 endsnippet
 
+context "math()"
+snippet quot "quotient" iA
+\,/\,
+endsnippet
+
 # RevTex format commands
 
 snippet item "itemize" bA
@@ -316,40 +400,78 @@ $0
 endsnippet
 
 snippet def "definition item" bA
-\item[{\it def.}] $0
+\begin{defi}
+$1
+\end{defi}
+\vspace{2ex}
+$0
 endsnippet
 
 snippet rmk "remark item" bA
-\item[{\it rmk.}] $0
+\begin{rmk}
+$1
+\end{rmk}
+\vspace{2ex}
+$0
 endsnippet
 
-snippet prop "proposition item" bA
-\item[{\it prop.}] $0
+snippet prop "prop item" bA
+\begin{prop}
+$1
+\end{prop}
+\vspace{2ex}
+$0
 endsnippet
 
 snippet thm "theorem item" bA
-\item[{\it thm.}] $0
+\begin{thm}
+$1
+\end{thm}
+\vspace{2ex}
+$0
 endsnippet
 
-snippet lem "lemma item" bA	
-\item[{\it lem.}] $0
+snippet lem "lemma item" bA
+\begin{lem}
+$1
+\end{lem}
+\vspace{2ex}
+$0
 endsnippet
 
 snippet cor "corollary item" bA
-\item[{\it cor.}] $0
+\begin{cor}
+$1
+\end{cor}
+\vspace{2ex}
+$0
 endsnippet
 
 snippet recall "recall item" bA
-\item[{\it recall.}] $0
-endsnippet 
-
-snippet note "note item" bA
-\item[{\it note.}] $0
+\begin{recall}
+$1
+\end{recall}
+\vspace{2ex}
+$0
 endsnippet
 
 snippet ex "example item" bA
-\item[{\it ex.}]
+\begin{ex}
+$1
+\end{ex}
+\vspace{2ex}
+$0
 endsnippet
+
+snippet pf "proof item" bA
+\begin{proof}
+$1
+\end{proof}
+\vspace{2ex}
+$0
+endsnippet
+
+# functions 
 
 context "math()"
 snippet sin "sin" iA
@@ -367,8 +489,8 @@ snippet tan "tan" iA
 endsnippet
 
 context "math()"
-snippet set "sset" iA
-\{$1 \;|\; $2\}
+snippet exp "exponential" iA
+\exp $0
 endsnippet
 
 # latin letters
@@ -436,7 +558,7 @@ endsnippet
 
 context "math()"
 snippet Om "Omega" i
-\Omega $0
+\mathrm{\Omega} $0
 endsnippet
 
 context "math()"
@@ -499,6 +621,11 @@ snippet si "sigma" i
 \sigma $0
 endsnippet
 
+context "math()" 
+snippet Si "Sigma" i
+\mathrm{\Sigma} $0
+endsnippet
+
 context "math()"
 snippet ta "tau" i
 \tau $0
@@ -522,4 +649,9 @@ endsnippet
 context "math()"
 snippet Xi "Xi" i
 \Xi $0
+endsnippet
+
+context "math()"
+snippet ch "Chi" i
+\chi $0
 endsnippet
