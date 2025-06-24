@@ -1,0 +1,657 @@
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment(): 
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	return x != '0' and y != '0'
+
+endglobal
+
+# beginning a document
+
+snippet art "Start a article document"
+\input{preamble}
+\documentclass{article}
+\title{$1}
+\author{Dane Jeon}
+\date{$2}
+\begin{document}
+$0
+\end{document}
+endsnippet
+
+snippet rev "Start a RevTex document"
+\input{preamble}
+\begin{document}
+\title{$1}
+\author{Dane Jeon}
+\noaffiliation
+\maketitle
+$0
+\end{document}
+endsnippet
+
+# general commands
+
+snippet hs "horizontal space" iA
+\hspace{$1ex}$0
+endsnippet 
+
+snippet vs "vertical space" iA
+\vspace{$1ex}$0
+endsnippet
+
+snippet beg "begin environment" bA
+\begin{$1}
+$0
+\end{$1}
+endsnippet
+
+snippet ( "round brackets" iA
+($1)$0
+endsnippet
+
+snippet { "curly brackets" iA
+\{$1\}$0
+endsnippet
+
+snippet sec "section" bA
+\section{$1}$0
+endsnippet
+
+snippet sub "subsection" bA
+\subsection{$1}$0
+endsnippet
+
+# general math commands
+
+snippet mm "inline math" wA
+\$$1\$$0
+endsnippet
+
+snippet dm "display math" wA
+\[$1\]
+$0
+endsnippet
+
+snippet ba "begin align" bA
+\begin{align*}
+$1
+\end{align*}
+$0
+endsnippet
+
+snippet bc "begin cases" bA
+\[\begin{cases}
+$1
+\end{cases}\]
+$0
+endsnippet
+
+context "math()"
+snippet op "math operator" iA
+\mathop{$1}$0
+endsnippet
+
+context "math()"
+snippet // "\frac{}{} command" iA
+\dfrac{$1}{$2}$0
+endsnippet
+
+snippet '([A-Za-z])(\d)' "auto subscript" wrA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+
+snippet '([A-Za-z])(\d\d)' "auto subscript 2" wrA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+
+# math font commands
+
+context "math()"
+snippet bm "bold font" iA
+{\bm $1}$0
+endsnippet
+
+snippet bf "bold font" iA
+{\bf $1}$0
+endsnippet
+
+context "math()"
+snippet bb "blackboard bold font" iA
+\mathbb{$1}$0
+endsnippet
+
+context "math()"
+priority 200
+snippet cal "calligraphic font" iA
+\mathcal{$1}$0
+endsnippet
+
+context "math()"
+snippet rm "roman font" iA
+\mathrm{$1}$0
+endsnippet
+
+context "math()"
+snippet fk "frak font" iA
+\mathfrak{$1}$0
+endsnippet
+
+# contextual auto physics commands
+
+context "math()"
+snippet hb "hbar" iA
+\hbar $0
+endsnippet
+
+context "math()"
+snippet bra "bra" iA
+\langle $0
+endsnippet
+
+context "math()"
+snippet ket "ket" iA
+\rangle $0
+endsnippet
+
+context "math()"
+snippet par "partial derivative" i
+\partial $0
+endsnippet
+
+context "math()"
+snippet part "partial derivate" iA
+\dfrac{\partial $1}{\partial $2}$0 
+endsnippet
+
+context "math()"
+snippet deri "derivate" iA
+\dfrac{d $1}{d $2}$0 
+endsnippet
+
+context "math()"
+snippet int "integrate" iA
+\int $0
+endsnippet
+
+# contextual auto math commands
+
+context "math()"
+snippet set "set" iA
+\\{$1 \,|\, $2\\}$0
+endsnippet
+
+context "math()"
+snippet in "set" i
+\in $0
+endsnippet
+
+context "math()"
+snippet sub "subset" iA
+\subset $0
+endsnippet
+
+context "math()"
+snippet sup "superset" iA
+\supset $0
+endsnippet
+
+context "math()"
+snippet bar "bar" iA
+\bar{$1}$0
+endsnippet
+
+context "math()"
+snippet under "under brace" iA
+\underbrace{$1}_{$2}$0
+endsnippet
+
+context "math()"
+snippet over "overline" iA
+\overline{$1}$0
+endsnippet
+
+context "math()"
+snippet cir "circle" iA
+\circ
+endsnippet
+
+context "math()"
+snippet equ "equivalent" i
+\equiv
+endsnippet
+
+context "math()"
+snippet hat "hat" iA
+\hat{$1}$0
+endsnippet
+
+context "math()"
+snippet => "implies" iA
+\implies $0
+endsnippet
+
+context "math()"
+snippet =< "implied by" iA
+\impliedby $0
+endsnippet
+
+context "math()"
+snippet <= "iff" iA
+\iff $0
+endsnippet
+
+context "math()"
+snippet -> "then" iA
+\rightarrow $0
+endsnippet
+
+context "math()"
+snippet -< "if" iA
+\leftarrow $0
+endsnippet
+
+context "math()"
+snippet <- "iff 2" iA
+\leftrightarrow $0
+endsnippet
+
+context "math()"
+snippet app "approx" iA
+\approx $0
+endsnippet 
+
+context "math()"
+snippet inf "infinity" iA
+\infty $0
+endsnippet
+
+context "math()"
+snippet sr "^2" iA
+^2$0
+endsnippet
+
+context "math()"
+snippet cb "^3" iA
+^3$0
+endsnippet
+
+context "math()"
+snippet sqrt "square root" iA
+\sqrt{$1}$0
+endsnippet
+
+context "math()"
+snippet tran "transpose" iA
+^{T}$0
+endsnippet
+
+context "math()"
+snippet comp "completment" iA
+\,\backslash\,$0
+endsnippet
+
+context "math()"
+snippet ^ "superscript" iA
+^{$1}$0
+endsnippet
+
+context "math()"
+snippet _ "subscript" iA
+_{$1}$0
+endsnippet
+
+context "math()"
+snippet matrix "matrix" iA
+\begin{pmatrix}
+$1
+\end{pmatrix}
+$0
+endsnippet
+
+context "math()"
+snippet tim "cross" iA
+\times $0
+endsnippet
+
+context "math()"
+snippet ld "ldots" iA
+\ldots $0
+endsnippet
+
+context "math()"
+snippet cd "cdot" iA
+\cdot $0
+endsnippet
+
+context "math()"
+snippet lim "limit" iA
+\lim $0
+endsnippet
+
+context "math()"
+snippet sum "summation" iA
+\sum $0
+endsnippet
+
+context "math()"
+snippet bigr "big round brackets" iA
+\Big($1\Big)$0
+endsnippet
+
+context "math()"
+snippet bigc "big curly brackets" iA
+\Big\\{$1\Big\\}$0
+endsnippet
+
+context "math()"
+snippet bigs "big square brackets" iA
+\Big[$1\Big]$0
+endsnippet
+
+context "math()"
+snippet bigu "big union" iA
+\bigcup $0
+endsnippet
+
+context "math()"
+snippet bigi "big intersection" iA
+\bigcap $0
+endsnippet
+
+context "math()"
+snippet cap "cap" iA
+\cap $0
+endsnippet
+
+context "math()"
+snippet cup "cup" iA
+\cup $0
+endsnippet
+
+context "math()"
+priority 100
+snippet dot "dot" iA
+\dot{$1}$0
+endsnippet
+
+context "math()"
+priority 200
+snippet ddot "ddot" iA
+\ddot{$1}$0
+endsnippet
+
+context "math()"
+snippet quot "quotient" iA
+\,/\,
+endsnippet
+
+# RevTex format commands
+
+snippet item "itemize" bA
+\begin{itemize}
+$0
+\end{itemize}
+endsnippet
+
+snippet def "definition item" bA
+\begin{defi}
+$1
+\end{defi}
+\vspace{2ex}
+$0
+endsnippet
+
+snippet rmk "remark item" bA
+\begin{rmk}
+$1
+\end{rmk}
+\vspace{2ex}
+$0
+endsnippet
+
+snippet prop "prop item" bA
+\begin{prop}
+$1
+\end{prop}
+\vspace{2ex}
+$0
+endsnippet
+
+snippet thm "theorem item" bA
+\begin{thm}
+$1
+\end{thm}
+\vspace{2ex}
+$0
+endsnippet
+
+snippet lem "lemma item" bA
+\begin{lem}
+$1
+\end{lem}
+\vspace{2ex}
+$0
+endsnippet
+
+snippet cor "corollary item" bA
+\begin{cor}
+$1
+\end{cor}
+\vspace{2ex}
+$0
+endsnippet
+
+snippet recall "recall item" bA
+\begin{recall}
+$1
+\end{recall}
+\vspace{2ex}
+$0
+endsnippet
+
+snippet ex "example item" bA
+\begin{ex}
+$1
+\end{ex}
+\vspace{2ex}
+$0
+endsnippet
+
+snippet pf "proof item" bA
+\begin{proof}
+$1
+\end{proof}
+\vspace{2ex}
+$0
+endsnippet
+
+# functions 
+
+context "math()"
+snippet sin "sin" iA
+\sin $0
+endsnippet
+
+context "math()"
+snippet cos "cos" iA
+\cos $0
+endsnippet
+
+context "math()"
+snippet tan "tan" iA
+\tan $0
+endsnippet
+
+context "math()"
+snippet exp "exponential" iA
+\exp $0
+endsnippet
+
+# latin letters
+
+context "math()"
+priority 100
+snippet al "alpha" i
+\alpha $0
+endsnippet
+
+context "math()"
+snippet Al "Alpha" i
+\Alpha $0
+endsnippet
+
+context "math()"
+snippet be "beta" i
+\beta $0
+endsnippet
+
+context "math()"
+snippet Be "Beta" i
+\Beta $0
+endsnippet
+
+context "math()"
+snippet ga "gamma" i
+\gamma $0
+endsnippet
+
+context "math()"
+snippet Ga "Gamma" i
+\mathrm{\Gamma} $0
+endsnippet 
+
+context "math()"
+snippet del "delta" i
+\delta $0
+endsnippet
+
+context "math()"
+snippet Del "Delta" i
+\Delta $0
+endsnippet
+
+context "math()"
+snippet ep "epsilon" i
+\varepsilon $0
+endsnippet
+
+context "math()"
+snippet mu "mu" i
+\mu $0
+endsnippet
+
+context "math()"
+snippet nu "nu" i
+\nu $0
+endsnippet
+
+context "math()"
+snippet om "omega" i
+\omega $0
+endsnippet
+
+context "math()"
+snippet Om "Omega" i
+\mathrm{\Omega} $0
+endsnippet
+
+context "math()"
+snippet pi "pi" i
+\pi $0
+endsnippet
+
+context "math()"
+snippet Pi "Pi" i
+\Pi $
+endsnippet
+
+context "math()"
+snippet ph "phi" i
+\phi $0
+endsnippet
+
+context "math()"
+snippet Ph "Phi" i
+\mathrm{\Phi} $0
+endsnippet 
+
+context "math()"
+snippet Ps "Psi" i
+\mathrm{\Psi} $0
+endsnippet
+
+context "math()"
+snippet ps "psi" i
+\psi $0
+endsnippet
+
+context "math()"
+snippet th "theta" i
+\theta $0
+endsnippet
+
+context "math()"
+snippet la "lambda" i
+\lambda $0
+endsnippet
+
+context "math()"
+snippet La "Lambda" i
+\Lambda $0
+endsnippet
+
+context "math()"
+snippet et "eta" i
+\eta $0
+endsnippet
+
+context "math()" 
+snippet rh "rho" i
+\rho $0
+endsnippet
+
+context "math()" 
+snippet si "sigma" i
+\sigma $0
+endsnippet
+
+context "math()" 
+snippet Si "Sigma" i
+\mathrm{\Sigma} $0
+endsnippet
+
+context "math()"
+snippet ta "tau" i
+\tau $0
+endsnippet
+
+context "math()"
+snippet na "nabla" i
+\nabla $0
+endsnippet
+
+context "math()"
+snippet ka "kappa" i
+\kappa $0
+endsnippet
+
+context "math()"
+snippet xi "xi" i
+\xi $0
+endsnippet
+
+context "math()"
+snippet Xi "Xi" i
+\Xi $0
+endsnippet
+
+context "math()"
+snippet ch "Chi" i
+\chi $0
+endsnippet
